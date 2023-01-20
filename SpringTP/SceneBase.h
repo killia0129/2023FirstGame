@@ -4,7 +4,7 @@ class SceneBase
 public:
     SceneBase();
     virtual ~SceneBase();
-    virtual void Update() = 0;
+    virtual void Run() = 0;
     bool isEnd();
 
 protected:
