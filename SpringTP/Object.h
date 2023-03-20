@@ -9,4 +9,3 @@ public:
 protected:
     VECTOR pos;
 };
-
