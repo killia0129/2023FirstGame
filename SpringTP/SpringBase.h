@@ -17,5 +17,8 @@ protected:
     float roll;
     float pitch;
     float yaw;
+    MATRIX matX;
+    MATRIX matY;
+    MATRIX matZ;
 };
 
