@@ -20,5 +20,6 @@ protected:
     MATRIX matX;
     MATRIX matY;
     MATRIX matZ;
+    unsigned int color;
 };
 
