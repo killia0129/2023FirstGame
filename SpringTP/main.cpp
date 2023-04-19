@@ -1,3 +1,6 @@
+//s—ñ‚ÍX¨Y¨Z‡‚Å‚©‚¯‚é
+//‰ñ“]‚É‚Â‚¢‚ÄAŽ²‚Ì•ûŒü‚É¶‚Ë‚¶
+
 #include"DxLib.h"
 #include"Camera.h"
 #include"SpringBase.h"
@@ -22,7 +25,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (!CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ClearDrawScreen();
-		camera->Update(0.16f);
+		camera->Update(0.16f,ZERO_POS);
 		spring->Draw();
 		ScreenFlip();
 	}

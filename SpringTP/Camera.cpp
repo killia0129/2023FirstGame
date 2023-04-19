@@ -1,10 +1,6 @@
-//s—ñ‚ÍX¨Y¨Z‡‚Å‚©‚¯‚é
-//‰ñ“]‚É‚Â‚¢‚ÄA²‚Ì•ûŒü‚É¶‚Ë‚¶
-
-
 #include "Camera.h"
 
-const float FirstRoll = 0.25f;
+const float FirstRoll = 0.25f*DX_PI_F;
 const float FirstPitch = 0.f;
 const float FirstYaw = 0.f;
 const float CameraSpeed = 0.05f;
@@ -30,7 +26,7 @@ Camera::~Camera()
 {
 }
 
-void Camera::Update(float deltaTime)
+void Camera::Update(float deltaTime, VECTOR _pos)
 {
 	MoveCamera(deltaTime);
 	if (cameraMoveFlag)
