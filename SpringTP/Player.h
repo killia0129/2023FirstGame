@@ -17,6 +17,7 @@ private:
     VECTOR bodyPos;
     VECTOR rightHandPos;
     VECTOR leftHandPos;
+    VECTOR conePos;
     void MoveAnim(float deltaTime);
     void AttackAnim(float deltaTime);
     void JumpAnim(float deltaTime);

@@ -83,4 +83,3 @@ void SpringBase::SetPos(VECTOR _pos)
 	pos = _pos;
 }
 
-
