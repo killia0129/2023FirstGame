@@ -9,6 +9,11 @@ public:
     virtual ~SpringBase();
     void Draw();
     void Update(float deltaTime);
+    void SetRoll(float _roll);
+    void SetPitch(float _pitch);
+    void SetYaw(float _yaw);
+    void SetRotate(float _roll, float _pitch, float _yaw);
+    void SetPos(VECTOR _pos);
 
 protected:
     VECTOR vec;
@@ -22,5 +27,9 @@ protected:
     MATRIX matY;
     MATRIX matZ;
     unsigned int color;
+    MATRIX rolled;
+    MATRIX pitched;
+    MATRIX yawed;
+    VECTOR veced;
 };
 

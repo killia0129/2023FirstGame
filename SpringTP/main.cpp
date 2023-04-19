@@ -30,6 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		ClearDrawScreen();
 		camera->Update(0.16f,ZERO_POS);
+		player->Update(0.16f);
 		map->Draw();
 		player->Draw();
 		ScreenFlip();

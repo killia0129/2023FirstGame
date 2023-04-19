@@ -28,5 +28,6 @@ private:
     float bodyAngle;
     float rightHandAngle;
     float leftHandAngle;
+    bool moveAnimFlag;
 };
 
