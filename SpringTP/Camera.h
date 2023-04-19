@@ -15,7 +15,9 @@ private:
     MATRIX matX;
     MATRIX matY;
     MATRIX matZ;
+    VECTOR vec;
+    bool cameraMoveFlag;
 
-    void MoveCamera();
+    void MoveCamera(float deltaTime);
 };
 

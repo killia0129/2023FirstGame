@@ -36,6 +36,10 @@ void SpringBase::Draw()
 	DrawLine3D(pos, lineLast, color);
 	for (int i = ZERO_I; i < SpringRollNum; i++)
 	{
-		DrawCone3D(VAdd(pos, VScale(vec, SpringRollRatio * (float)i)), VAdd(pos, VScale(vec, (SpringRollRatio + SpringRollMidDiff) * (float)i)), size,SpringRollDivNum, color, color, false);
+		DrawCone3D(VAdd(pos, VScale(vec, length*SpringRollRatio * (float)i)), VAdd(pos, VScale(vec, length * SpringRollRatio  * (float)i + SpringRollMidDiff)), size,SpringRollDivNum, color, color, false);
 	}
+}
+
+void SpringBase::Update(float deltaTime)
+{
 }
