@@ -4,9 +4,9 @@ class Camera :
     public Object
 {
 public:
-    Camera(VECTOR pos);
+    Camera(VECTOR _pos);
     virtual ~Camera();
-    void MoveCamera();
+    void Update(float deltaTime);
 
 private:
     float roll;
@@ -15,5 +15,7 @@ private:
     MATRIX matX;
     MATRIX matY;
     MATRIX matZ;
+
+    void MoveCamera();
 };
 
