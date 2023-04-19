@@ -17,9 +17,9 @@ SpringBase::SpringBase(VECTOR _pos, VECTOR _vec, float _length, float _size, flo
 	roll = _roll;
 	pitch = _pitch;
 	yaw = _yaw;
-	matX = MGetRotX(roll);
-	matY = MGetRotY(pitch);
-	matZ = MGetRotZ(yaw);
+	matX = MGetRotX(roll * DX_PI_F);
+	matY = MGetRotY(pitch * DX_PI_F);
+	matZ = MGetRotZ(yaw * DX_PI_F);
 	vec = VTransform(normedVec, matX);
 	vec = VTransform(vec, matY);
 	vec = VTransform(vec, matZ);

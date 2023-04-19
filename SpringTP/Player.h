@@ -21,5 +21,11 @@ private:
     void JumpAnim(float deltaTime);
     bool inAttack;
     bool inJump;
+    float roll;
+    float pitch;
+    float yaw;
+    float bodyAngle;
+    float rightHandAngle;
+    float leftHandAngle;
 };
 
