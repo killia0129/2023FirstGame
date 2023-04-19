@@ -8,6 +8,7 @@ public:
     Player(VECTOR _pos);
     virtual ~Player();
     void Update(float deltaTime);
+    void Draw();
 
 private:
     SpringBase* bodySpring;

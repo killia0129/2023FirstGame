@@ -4,6 +4,8 @@
 #include"DxLib.h"
 #include"Camera.h"
 #include"SpringBase.h"
+#include"Player.h"
+#include"Map.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -19,14 +21,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetCameraPositionAndTarget_UpVecY(VGet(0, 0, 0), VGet(0.0f, 0.0f, 250.0f));
 
 	//デバッグ用
-	SpringBase* spring = new SpringBase(VGet(0, -100, -100), VGet(0, -1, 0), 30.f, 5.f, 0.0f, 0.0f, 0.0f);
+	SpringBase* spring = new SpringBase(VGet(0, 0, 0), VGet(0, -1, 0), 30.f, 5.f, 0.0f, 0.0f, 0.0f);
 	Camera* camera = new Camera(ZERO_POS);
+	Player* player = new Player(ZERO_POS);
+	Map* map = new Map;
 
 	while (!CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ClearDrawScreen();
 		camera->Update(0.16f,ZERO_POS);
-		spring->Draw();
+		map->Draw();
+		player->Draw();
 		ScreenFlip();
 	}
 }

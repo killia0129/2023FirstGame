@@ -2,8 +2,8 @@
 #include"DxLib.h"
 
 
-const int SpringRollNum = 5;
-const float SpringRollRatio = 0.25f;
+const int SpringRollNum = 6;
+const float SpringRollRatio = 0.2f;
 const float SpringRollMidDiff = 0.001f;
 const int SpringRollDivNum = 16;
 

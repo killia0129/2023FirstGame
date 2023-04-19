@@ -1,14 +1,16 @@
 #include "Camera.h"
 
-const float FirstRoll = 0.25f*DX_PI_F;
+const float FirstRoll = 0.25f;
 const float FirstPitch = 0.f;
 const float FirstYaw = 0.f;
 const float CameraSpeed = 0.05f;
-const VECTOR FirstVec = VGet(0, 0, 1);
+const VECTOR FirstVec = VGet(0, 0, -1);
+const float PlayerCameraDis = 50.f;
 
 Camera::Camera(VECTOR _pos)
 {
 	pos = _pos;
+	pos.z -= PlayerCameraDis;
 	roll = FirstRoll;
 	pitch = FirstPitch;
 	yaw = FirstYaw;
@@ -38,13 +40,23 @@ void Camera::Update(float deltaTime, VECTOR _pos)
 		vec = VTransform(vec, matY);
 		vec = VTransform(vec, matZ);
 	}
-	SetCameraPositionAndTarget_UpVecY(pos, VAdd(pos, vec));
+	pos = VAdd(_pos, VScale(vec,PlayerCameraDis));
+	SetCameraPositionAndTarget_UpVecY(pos, _pos);
 	cameraMoveFlag = false;
 }
 
 void Camera::MoveCamera(float deltaTime)
 {
 	if (CheckHitKey(KEY_INPUT_RIGHT))
+	{
+		pitch += CameraSpeed * deltaTime;
+		if (pitch > RoundRad)
+		{
+			pitch = pitch - RoundRad;
+		}
+		cameraMoveFlag = true;
+	}
+	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
 		pitch -= CameraSpeed * deltaTime;
 		if (pitch < ZERO_F)
@@ -53,19 +65,12 @@ void Camera::MoveCamera(float deltaTime)
 		}
 		cameraMoveFlag = true;
 	}
-	if (CheckHitKey(KEY_INPUT_LEFT))
-	{
-		pitch += CameraSpeed * deltaTime;
-		if (pitch > RoundRad)
-		{
-			pitch = pitch - RoundRad;
-		}
-		cameraMoveFlag = true;
-		
-	}
 	if (CheckHitKey(KEY_INPUT_UP))
 	{
-		roll += CameraSpeed * deltaTime;
+		if (roll < 0.4f)
+		{
+			roll += CameraSpeed * deltaTime;
+		}
 		if (roll > RoundRad)
 		{
 			roll = roll - RoundRad;
@@ -74,7 +79,10 @@ void Camera::MoveCamera(float deltaTime)
 	}
 	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
-		roll -= CameraSpeed * deltaTime;
+		if (roll > 0.1f)
+		{
+			roll -= CameraSpeed * deltaTime;
+		}
 		if (roll < ZERO_F)
 		{
 			roll = RoundRad - roll;
@@ -82,4 +90,5 @@ void Camera::MoveCamera(float deltaTime)
 		cameraMoveFlag = true;
 		
 	}
+	DrawFormatString(10, 10, GetColor(255, 255, 255), "roll : %f", roll);
 }
