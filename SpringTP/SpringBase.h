@@ -16,17 +16,19 @@ public:
     void SetPos(VECTOR _pos);
 
 protected:
-    VECTOR vec;
-    VECTOR normedVec;
-    float length;
-    float size;
+    VECTOR vec;//中心軸のベクトル
+    VECTOR normedVec;//正規化したvec
+    float length;//長さ
+    float size;//円の大きさ
     float roll;
     float pitch;
     float yaw;
-    MATRIX matX;
-    MATRIX matY;
-    MATRIX matZ;
+    MATRIX matX;//X軸回転行列
+    MATRIX matY;//Y軸回転行列
+    MATRIX matZ;//Z軸回転行列
     unsigned int color;
+
+    //最後に加える回転関連
     MATRIX rolled;
     MATRIX pitched;
     MATRIX yawed;

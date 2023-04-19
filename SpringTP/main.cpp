@@ -35,4 +35,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		player->Draw();
 		ScreenFlip();
 	}
+
+	DxLib_End();
+
+	return 0;
 }
