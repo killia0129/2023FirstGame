@@ -90,5 +90,4 @@ void Camera::MoveCamera(float deltaTime)
 		cameraMoveFlag = true;
 		
 	}
-	DrawFormatString(10, 10, GetColor(255, 255, 255), "roll : %f", roll);
 }

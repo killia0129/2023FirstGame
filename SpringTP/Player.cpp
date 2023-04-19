@@ -15,6 +15,11 @@ const int ConeDivNum = 16;
 const VECTOR ConeVec = VGet(0, 0, ConeSize);
 const unsigned int Green = GetColor(0, 255, 0);
 const int AlphaBlendRatio = 160;
+const float PlayerSpeed = 0.2f;
+const VECTOR AheadVec = VGet(0, 0, PlayerSpeed);
+const VECTOR BackVec = VGet(0, 0, -PlayerSpeed);
+const VECTOR RightVec = VGet(PlayerSpeed, 0, 0);
+const VECTOR AheadVec = VGet(PlayerSpeed, 0, 0);
 
 Player::Player(VECTOR _pos)
 {
@@ -47,6 +52,10 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
+	if (CheckHitKey(KEY_INPUT_W))
+	{
+
+	}
 	MoveAnim(deltaTime);
 	bodySpring->Update(deltaTime);
 	rightHandSpring->Update(deltaTime);
