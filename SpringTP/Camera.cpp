@@ -45,6 +45,11 @@ void Camera::Update(float deltaTime, VECTOR _pos)
 	cameraMoveFlag = false;
 }
 
+float Camera::GetPitch()
+{
+	return pitch;
+}
+
 void Camera::MoveCamera(float deltaTime)
 {
 	if (CheckHitKey(KEY_INPUT_RIGHT))

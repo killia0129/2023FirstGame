@@ -29,6 +29,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (!CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ClearDrawScreen();
+		player->Move(camera->GetPitch(),0.16f);
 		camera->Update(0.16f,ZERO_POS);
 		player->Update(0.16f);
 		map->Draw();

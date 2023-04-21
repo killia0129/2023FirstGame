@@ -7,6 +7,7 @@ public:
     Camera(VECTOR _pos);
     virtual ~Camera();
     void Update(float deltaTime,VECTOR _pos);
+    float GetPitch();
 
 private:
     VECTOR pos;

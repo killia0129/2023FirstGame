@@ -9,6 +9,8 @@ public:
     virtual ~Player();
     void Update(float deltaTime);
     void Draw();
+    //ˆÚ“®
+    void Move(float cameraPitch, float deltaTime);
 
 private:
 
@@ -42,6 +44,5 @@ private:
     float bodyAngle;
     float rightHandAngle;
     float leftHandAngle;
-
 };
 

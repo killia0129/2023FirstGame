@@ -126,3 +126,41 @@ void Player::AttackAnim(float deltaTime)
 void Player::JumpAnim(float deltaTime)
 {
 }
+
+void Player::Move(float cameraPitch,float deltaTime)
+{
+	MATRIX cameraMatY = MGetRotY(cameraPitch+(RoundRad*HALF));
+	VECTOR moveVec = ZERO_POS;
+	if (CheckHitKey(KEY_INPUT_W))
+	{
+		moveVec = VAdd(moveVec, AheadVec);
+	}
+	if (CheckHitKey(KEY_INPUT_S))
+	{
+		moveVec = VAdd(moveVec, BackVec);
+	}
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		moveVec = VAdd(moveVec, LeftVec);
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		moveVec = VAdd(moveVec, RightVec);
+	}
+	if (VSize(moveVec) != 0.f)
+	{
+		moveVec = VTransform(moveVec, cameraMatY);
+		moveVec = VNorm(moveVec);
+		moveVec = VScale(moveVec, PlayerSpeed * deltaTime);
+		pos = VAdd(pos, moveVec);
+	}
+	bodyPos = pos;
+	bodyPos.y += BodyLength;   
+	rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch)));
+	leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch)));
+	bodySpring->SetPos(bodyPos);
+	rightHandSpring->SetPos(rightHandPos);
+	leftHandSpring->SetPos(leftHandPos);
+	conePos = bodyPos;
+	conePos.y += ConeR;
+}
