@@ -11,6 +11,7 @@ public:
     void Draw();
     //ˆÚ“®
     void Move(float cameraPitch, float deltaTime);
+    VECTOR GetPos();
 
 private:
 

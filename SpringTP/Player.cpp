@@ -15,7 +15,7 @@ const int ConeDivNum = 16;
 const VECTOR ConeVec = VGet(0, 0, ConeSize);
 const unsigned int Green = GetColor(0, 255, 0);
 const int AlphaBlendRatio = 160;
-const float PlayerSpeed = 0.2f;
+const float PlayerSpeed = 2.f;
 const VECTOR AheadVec = VGet(0, 0, PlayerSpeed);
 const VECTOR BackVec = VGet(0, 0, -PlayerSpeed);
 const VECTOR RightVec = VGet(PlayerSpeed, 0, 0);
@@ -75,9 +75,14 @@ void Player::Update(float deltaTime)
 	//ここまでデバッグ用
 	rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch)));
 	leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch)));
+	float tmp = bodyPos.y;
+	bodyPos = pos;
+	bodyPos.y = tmp;
 	bodySpring->SetPos(bodyPos);
 	rightHandSpring->SetPos(rightHandPos);
 	leftHandSpring->SetPos(leftHandPos);
+	conePos = bodyPos;
+	conePos.y += ConeR;
 }
 
 void Player::Draw()
@@ -129,7 +134,7 @@ void Player::JumpAnim(float deltaTime)
 
 void Player::Move(float cameraPitch,float deltaTime)
 {
-	MATRIX cameraMatY = MGetRotY(cameraPitch+(RoundRad*HALF));
+	MATRIX cameraMatY = MGetRotY(cameraPitch*DX_PI_F);
 	VECTOR moveVec = ZERO_POS;
 	if (CheckHitKey(KEY_INPUT_W))
 	{
@@ -154,13 +159,21 @@ void Player::Move(float cameraPitch,float deltaTime)
 		moveVec = VScale(moveVec, PlayerSpeed * deltaTime);
 		pos = VAdd(pos, moveVec);
 	}
-	bodyPos = pos;
-	bodyPos.y += BodyLength;   
-	rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch)));
-	leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch)));
-	bodySpring->SetPos(bodyPos);
-	rightHandSpring->SetPos(rightHandPos);
-	leftHandSpring->SetPos(leftHandPos);
-	conePos = bodyPos;
-	conePos.y += ConeR;
+
+	DrawFormatString(10, 10, GetColor(255, 255, 255), "moveVec(x,y,z):(%f, %f, %f)", moveVec.x, moveVec.y, moveVec.z);
+	DrawFormatString(10, 50, GetColor(255, 255, 255), "cameraPitch:%f", cameraPitch);
+	//bodyPos = pos;
+	//bodyPos.y += BodyLength;   
+	//rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch)));
+	//leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch)));
+	//bodySpring->SetPos(bodyPos);
+	//rightHandSpring->SetPos(rightHandPos);
+	//leftHandSpring->SetPos(leftHandPos);
+	//conePos = bodyPos;
+	//conePos.y += ConeR;
+}
+
+VECTOR Player::GetPos()
+{
+	return pos;
 }
