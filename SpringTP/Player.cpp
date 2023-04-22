@@ -162,15 +162,6 @@ void Player::Move(float cameraPitch,float deltaTime)
 
 	DrawFormatString(10, 10, GetColor(255, 255, 255), "moveVec(x,y,z):(%f, %f, %f)", moveVec.x, moveVec.y, moveVec.z);
 	DrawFormatString(10, 50, GetColor(255, 255, 255), "cameraPitch:%f", cameraPitch);
-	//bodyPos = pos; 
-	//bodyPos.y += BodyLength;   
-	//rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch)));
-	//leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch)));
-	//bodySpring->SetPos(bodyPos);
-	//rightHandSpring->SetPos(rightHandPos);
-	//leftHandSpring->SetPos(leftHandPos);
-	//conePos = bodyPos;
-	//conePos.y += ConeR;
 }
 
 VECTOR Player::GetPos()
