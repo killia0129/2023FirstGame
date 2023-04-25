@@ -139,6 +139,7 @@ void Player::Move(float cameraPitch,float deltaTime)
 	VECTOR moveVec = ZERO_POS;
 	int buttonCounter = ZERO_I;
 	turnRad = ZERO_F;
+	bool aFlag = false;
 	if (CheckHitKey(KEY_INPUT_W))
 	{
 		moveVec = VAdd(moveVec, AheadVec);
@@ -155,6 +156,7 @@ void Player::Move(float cameraPitch,float deltaTime)
 		moveVec = VAdd(moveVec, LeftVec);
 		turnRad += HALF * RoundRad + QUARTER * RoundRad;
 		buttonCounter++;
+		aFlag = true;
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
@@ -170,6 +172,10 @@ void Player::Move(float cameraPitch,float deltaTime)
 		pos = VAdd(pos, moveVec);
 		if (buttonCounter != ZERO_I)
 		{
+			if (turnRad == HALF * RoundRad + QUARTER * RoundRad && buttonCounter == 2&&aFlag)
+			{
+				turnRad += RoundRad;
+			}
 			turnRad /= (float)buttonCounter;
 			pitch = turnRad + cameraPitch;
 		}
