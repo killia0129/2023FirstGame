@@ -44,6 +44,7 @@ Player::Player(VECTOR _pos)
 	leftHandSpring = new SpringBase(leftHandPos, DownVec, HandLength, HandSize, ZERO_F, ZERO_F, ZERO_F);
 	conePos = bodyPos;
 	conePos.y += ConeR;
+	turnRad = ZERO_F;
 }
 
 Player::~Player()
@@ -73,8 +74,8 @@ void Player::Update(float deltaTime)
 		pitch -= 0.2f * deltaTime;
 	}
 	//ここまでデバッグ用
-	rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch)));
-	leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch)));
+	rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch*DX_PI_F)));
+	leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch * DX_PI_F)));
 	float tmp = bodyPos.y;
 	bodyPos = pos;
 	bodyPos.y = tmp;
@@ -91,9 +92,9 @@ void Player::Draw()
 	rightHandSpring->Draw();
 	leftHandSpring->Draw();
 	SetDrawBlendMode(DX_BLENDGRAPHTYPE_ALPHA, AlphaBlendRatio);
-	DrawCone3D(VAdd(conePos, VTransform(ConeVec, MGetRotY(pitch))), conePos, ConeR, ConeDivNum, Green, Green, true);
+	DrawCone3D(VAdd(conePos, VTransform(ConeVec, MGetRotY(pitch * DX_PI_F))), conePos, ConeR, ConeDivNum, Green, Green, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, ZERO_I);
-	DrawCone3D(VAdd(conePos, VTransform(ConeVec, MGetRotY(pitch))), conePos, ConeR, ConeDivNum, Green, Green, false);
+	DrawCone3D(VAdd(conePos, VTransform(ConeVec, MGetRotY(pitch * DX_PI_F))), conePos, ConeR, ConeDivNum, Green, Green, false);
 }
 
 void Player::MoveAnim(float deltaTime)
@@ -136,21 +137,30 @@ void Player::Move(float cameraPitch,float deltaTime)
 {
 	MATRIX cameraMatY = MGetRotY(cameraPitch*DX_PI_F);
 	VECTOR moveVec = ZERO_POS;
+	int buttonCounter = ZERO_I;
+	turnRad = ZERO_F;
 	if (CheckHitKey(KEY_INPUT_W))
 	{
 		moveVec = VAdd(moveVec, AheadVec);
+		buttonCounter++;
 	}
 	if (CheckHitKey(KEY_INPUT_S))
 	{
 		moveVec = VAdd(moveVec, BackVec);
+		turnRad += HALF * RoundRad;
+		buttonCounter++;
 	}
 	if (CheckHitKey(KEY_INPUT_A))
 	{
 		moveVec = VAdd(moveVec, LeftVec);
+		turnRad += HALF * RoundRad + QUARTER * RoundRad;
+		buttonCounter++;
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
 		moveVec = VAdd(moveVec, RightVec);
+		turnRad += QUARTER * RoundRad;
+		buttonCounter++;
 	}
 	if (VSize(moveVec) != 0.f)
 	{
@@ -158,6 +168,11 @@ void Player::Move(float cameraPitch,float deltaTime)
 		moveVec = VNorm(moveVec);
 		moveVec = VScale(moveVec, PlayerSpeed * deltaTime);
 		pos = VAdd(pos, moveVec);
+		if (buttonCounter != ZERO_I)
+		{
+			turnRad /= (float)buttonCounter;
+			pitch = turnRad + cameraPitch;
+		}
 	}
 
 	DrawFormatString(10, 10, GetColor(255, 255, 255), "moveVec(x,y,z):(%f, %f, %f)", moveVec.x, moveVec.y, moveVec.z);
