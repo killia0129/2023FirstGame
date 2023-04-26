@@ -70,9 +70,9 @@ void SpringBase::SetYaw(float _yaw)
 void SpringBase::SetRotate(float _roll, float _pitch, float _yaw)
 {
 	veced = vec;
-	rolled = MGetRotX(_roll);
-	pitched = MGetRotY(_pitch);
-	yawed = MGetRotZ(_yaw);
+	rolled = MGetRotX(_roll * DX_PI_F);
+	pitched = MGetRotY(_pitch * DX_PI_F);
+	yawed = MGetRotZ(_yaw * DX_PI_F);
 	veced = VTransform(veced, rolled);
 	veced = VTransform(veced, pitched);
 	veced = VTransform(veced, yawed);
