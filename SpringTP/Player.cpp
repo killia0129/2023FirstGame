@@ -150,7 +150,7 @@ void Player::Move(float cameraPitch,float deltaTime)
 		turnRad += QUARTER * RoundRad;
 		buttonCounter++;
 	}
-	if (VSize(moveVec) != 0.f)
+	if (VSize(moveVec) != ZERO_F)
 	{
 		moveVec = VTransform(moveVec, cameraMatY);
 		moveVec = VNorm(moveVec);

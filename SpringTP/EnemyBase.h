@@ -7,7 +7,7 @@ public:
     EnemyBase();
     virtual ~EnemyBase();
     virtual void Update(float deltaTime) = 0;
-
+    virtual void Draw() = 0;
 
 protected:
     VECTOR aheadVec;

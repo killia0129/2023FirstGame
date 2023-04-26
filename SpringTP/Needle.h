@@ -7,6 +7,7 @@ public:
     Needle(VECTOR _pos, int _tag);
     virtual ~Needle();
     void Update(float deltaTime);
+    void Draw();
 
 private:
     float speed;
