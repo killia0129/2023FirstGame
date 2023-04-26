@@ -6,6 +6,8 @@ const float FirstYaw = 0.f;
 const float CameraSpeed = 0.05f;
 const VECTOR FirstVec = VGet(0, 0, -1);
 const float PlayerCameraDis = 75.f;
+const float CameraTopEnd = 0.4f;
+const float CameraBottomEnd = 0.05f;
 
 Camera::Camera(VECTOR _pos)
 {
@@ -72,7 +74,7 @@ void Camera::MoveCamera(float deltaTime)
 	}
 	if (CheckHitKey(KEY_INPUT_UP))
 	{
-		if (roll < 0.4f)
+		if (roll < CameraTopEnd)
 		{
 			roll += CameraSpeed * deltaTime;
 		}
@@ -84,7 +86,7 @@ void Camera::MoveCamera(float deltaTime)
 	}
 	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
-		if (roll > 0.1f)
+		if (roll > CameraBottomEnd)
 		{
 			roll -= CameraSpeed * deltaTime;
 		}

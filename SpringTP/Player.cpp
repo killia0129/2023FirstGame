@@ -6,7 +6,7 @@ const float BodySize = 2.f;
 const float HandSize = 1.25f;
 const VECTOR DownVec = VGet(0, -1, 0);
 const float MoveAnimSpeed = 0.3f;
-const float MoveAnimTop = 0.64f;
+const float MoveAnimTop = 0.4f;
 const VECTOR ToRightHandVec = VGet(BodySize + HandSize, BodyLength, 0);
 const VECTOR ToLeftHandVec = VGet(-(BodySize + HandSize), BodyLength, 0);
 const float ConeR = 1.5f;
@@ -53,10 +53,6 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
-	if (CheckHitKey(KEY_INPUT_W))
-	{
-
-	}
 	MoveAnim(deltaTime);
 	bodySpring->Update(deltaTime);
 	rightHandSpring->Update(deltaTime);
@@ -64,16 +60,6 @@ void Player::Update(float deltaTime)
 	bodySpring->SetRotate(roll, pitch, yaw);
 	rightHandSpring->SetRotate(roll, pitch, yaw);
 	leftHandSpring->SetRotate(roll, pitch, yaw);
-	//ここから
-	if (CheckHitKey(KEY_INPUT_E))
-	{
-		pitch += 0.2f * deltaTime;
-	}
-	if (CheckHitKey(KEY_INPUT_Q))
-	{
-		pitch -= 0.2f * deltaTime;
-	}
-	//ここまでデバッグ用
 	rightHandPos = VAdd(pos, VTransform(ToRightHandVec, MGetRotY(pitch*DX_PI_F)));
 	leftHandPos = VAdd(pos, VTransform(ToLeftHandVec, MGetRotY(pitch * DX_PI_F)));
 	float tmp = bodyPos.y;
@@ -180,9 +166,6 @@ void Player::Move(float cameraPitch,float deltaTime)
 			pitch = turnRad + cameraPitch;
 		}
 	}
-
-	DrawFormatString(10, 10, GetColor(255, 255, 255), "moveVec(x,y,z):(%f, %f, %f)", moveVec.x, moveVec.y, moveVec.z);
-	DrawFormatString(10, 50, GetColor(255, 255, 255), "cameraPitch:%f", cameraPitch);
 }
 
 VECTOR Player::GetPos()
