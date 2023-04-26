@@ -12,3 +12,8 @@ const float QUARTER = 0.25f;
 const float TWICE = 2.f;
 
 const float RoundRad = 2.f;
+
+enum Enemy_Tag
+{
+	NEEDLE,METEOR
+};

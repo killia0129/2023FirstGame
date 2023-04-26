@@ -1,11 +1,11 @@
 #include "Camera.h"
 
-const float FirstRoll = 0.25f;
+const float FirstRoll = 0.15f;
 const float FirstPitch = 0.f;
 const float FirstYaw = 0.f;
 const float CameraSpeed = 0.05f;
 const VECTOR FirstVec = VGet(0, 0, -1);
-const float PlayerCameraDis = 50.f;
+const float PlayerCameraDis = 75.f;
 
 Camera::Camera(VECTOR _pos)
 {
