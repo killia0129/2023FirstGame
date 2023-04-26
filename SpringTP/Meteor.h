@@ -11,5 +11,7 @@ public:
 private:
     bool waveFlag;
     float waveController;
+    void WaveMove(float deltaTime);
+    void StraightMove(float deltaTime);
 };
 
