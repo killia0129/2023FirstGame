@@ -13,6 +13,7 @@ public:
 private:
 	std::vector<EnemyBase*> enemy;
 	float spawnTimer;
-
+	void Entry();
+	void Delete();
 };
 
