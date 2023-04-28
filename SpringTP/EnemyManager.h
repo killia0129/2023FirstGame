@@ -8,9 +8,11 @@ class EnemyManager
 public:
 	EnemyManager();
 	virtual ~EnemyManager();
+	void Update(float deltaTime);
 
 private:
 	std::vector<EnemyBase*> enemy;
+	float spawnTimer;
 
 };
 
